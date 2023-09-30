@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-"""
+"""Uses the GitHub API to display your id
 """
 
 if __name__ == "__main__":
-    import urllib.request as r
+    from requests.auth import HTTPBasicAuth
+    import requests
     import sys
 
-    url = sys.argv[1]
+    auth = HTTPBasicAuth(sys.argv[1], sys.argv[2])
+    r = requests.get("https://api.github.com/user", auth=auth)
+    print(r.json().get("id"))
